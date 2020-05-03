@@ -1,0 +1,49 @@
+{% extends 'post/post_base.html' %}
+{% block pre_post %}
+<style>
+    .groupcontent{
+     box-shadow: 0 15px 25px rgba(0,0,0,.6);
+     padding: 20px 20px 20px 20px;
+     border-radius: 10px;
+     width:400px;
+     background: rgba(0,0,0,.5);
+     box-sizing: border-box;
+     color:white;
+     position:absolute;
+     top:10%;
+     left:10%;
+     font-family: 'Varela Round', serif;
+}
+
+</style>
+<div class="groupcontent">
+    <div class="col-md-4">
+        <h1>@{{post_user.username}}</h1>
+        <p>Post History</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block post_content %}
+<style>
+    .list{
+     box-shadow: 0 15px 25px rgba(0,0,0,.6);
+     padding: 20px 20px 20px 20px;
+     border-radius: 10px;
+     width:1000px;
+     background: rgba(0,0,0,.5);
+     box-sizing: border-box;
+     color:white;
+     position:absolute;
+     top:30%;
+     left:10%;
+}
+</style>
+<div class="list">
+    <div class="col-md-8">
+        {% for post in post_list %}
+            {% include 'post/_post.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

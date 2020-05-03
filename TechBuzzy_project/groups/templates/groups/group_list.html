@@ -1,0 +1,64 @@
+{% extends 'groups/group_base.html' %}
+
+{% block pregroup %}
+<style>
+    .groupcontent{
+     box-shadow: 0 15px 25px rgba(0,0,0,.6);
+     padding: 20px 20px 20px 20px;
+     border-radius: 10px;
+     width:600px;
+     background: rgba(0,0,0,.5);
+     box-sizing: border-box;
+     text-color:white;
+     position:absolute;
+     left:10%;
+     font-family: 'Varela Round', serif;
+     color:white;
+   }
+</style>
+<div class="groupcontent">
+    <div class="col-md-10">
+        <div class="">
+            {% if user.is_authenticated %}
+                <h1 class="mb-3 w-40">
+                    <strong>Welcome</strong> <a href="{% url 'post:for_user' username=user.username %}">@{{user.username}}</a>
+                </h1>
+            {% endif %}
+            <h3>Groups</h3>
+            <p>Select a Group with a shared interest!</p>
+        </div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'groups:create' %}" class="btn btn-success" role="button"><span class="fa fa-plus"></span>Create Group</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block groupcontent %}
+<style>
+    .pos{
+    position:absolute;
+    left:50%;
+    top:20%;
+    width:900px;
+    }
+
+</style>
+<div class="pos">
+    <div class="col-md-8 ">
+        <div class="list-group ">
+            {% for group in object_list %}
+                <a class="list-group-item list-group-item-action flex-column list-group-item-dark align-item-start" href="{% url 'groups:single' slug=group.slug %}">
+                    <h3 class="mb-1">{{group.name}}</h3>
+                    <p class="mb-2">{{group.description|safe}}</p>
+                    <div class="w-40 d-flex justify-content-between">
+                        <small class="text-muted">member: <span class="badge badge-pill badge-dark">{{ group.members.count }}</span></small>
+                        <small class="text-muted">post: <span class="badge badge-pill badge-dark">{{ group.posts.count }}</span></small>
+                        <span></span><span></span>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

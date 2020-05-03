@@ -1,0 +1,20 @@
+{% extends 'post/post_base.html' %}
+{% block post_content %}
+<style>
+    .del{
+     box-shadow: 0 15px 25px rgba(0,0,0,.6);
+     color:white;
+     padding: 20px 20px 20px 20px;
+     border-radius: 10px;
+     width:700px;
+     background: rgba(0,0,0,.5);
+     position:relative;
+     right:15%;
+     font-family: 'Varela Round', serif;
+     box-sizing: border-box;
+    }
+</style>
+    <div class="del">
+    {% include 'post/_post.html' %}
+    </div>
+{% endblock %}

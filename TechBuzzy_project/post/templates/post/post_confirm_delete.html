@@ -1,0 +1,33 @@
+{% extends 'post/post_base.html' %}
+{% block post_content %}
+<style>
+    .del{
+     box-shadow: 0 15px 25px rgba(0,0,0,.6);
+     color:white;
+     padding: 20px 20px 20px 20px;
+     border-radius: 10px;
+     width:700px;
+     background: rgba(0,0,0,.5);
+     position:relative;
+     right:15%;
+     box-sizing: border-box;
+     font-family: 'Varela Round', serif;
+     }
+</style>
+    <div class="del">
+
+    <h3>Are you sure you want to delete post?</h3>
+        <br>
+    <div class="posts">
+        {% include 'post/_post.html' with post=object hide_delete=True %}
+    </div>
+        <br>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Confirm Delete" class="btn btn-danger btn-large">
+	    <a href="{% url 'posts:single' username=user.username pk=object.pk %}" class="btn btn-light btn-large">Cancel</a>
+    </form>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'groups/group_base.html' %}
+
+{% block pregroup %}
+<style>
+    .groupcontent{
+     box-shadow: 0 15px 25px rgba(0,0,0,.6);
+     padding: 20px 20px 20px 20px;
+     border-radius: 10px;
+     width:400px;
+     background: rgba(0,0,0,.5);
+     box-sizing: border-box;
+     text-color:white;
+     position:absolute;
+     left:10%;
+     font-family:  serif;
+     color:white;
+     font-family: 'Varela Round', serif;
+}
+</style>
+<div class="groupcontent">
+<div class="contianer">
+    <h1>{{groups.name}}</h1>
+    <h3>Members :{{groups.members.count}}</h3>
+    <div class="content">
+        {% if user in groups.members.all %}
+        <a href="{% url 'groups:leave' slug=groups.slug %}" class="btn btn-lg btn-warning"><span class="fa fa-times-circle-o"></span>Leave</a>
+        {% else %}
+        <a href="{% url 'groups:join' slug=groups.slug %}" class="btn btn-lg btn-success"><span class="fa fa-check-circle-o"></span>Join</a>
+        {% endif %}
+    </div>
+</div>
+</div>
+{% endblock %}
+
+{% block groupcontent %}
+<style>
+    .groupcon{
+     box-shadow: 0 15px 25px rgba(0,0,0,.6);
+     padding: 20px 20px 20px 20px;
+     border-radius: 10px;
+     width:1000px;
+     background: rgba(0,0,0,.5);
+     box-sizing: border-box;
+     text-color:white;
+     position:absolute;
+     left:40%;
+     color:white;
+     font-family: 'Varela Round', serif;
+}
+</style>
+
+<div class="groupcon">
+    <div class="col-md-8">
+    {% if groups.posts.count == 0 %}
+        <h2>No post in this group yet!</h2>
+    {% else %}
+        {% for post in groups.posts.all %}
+            {% include 'post/_post.html' %}
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

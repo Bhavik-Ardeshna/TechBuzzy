@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TechBuzzy</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- For Glyhicon -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/master.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Cinzel:wght@700&family=Julius+Sans+One&family=Lobster&family=Lora:wght@500&family=Merienda+One&family=Russo+One&display=swap" rel="stylesheet"></head>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+<body>
+
+      <nav class="navbar navbar-expand-lg navbar-dark mynav navcolor navfont" role="navigation" id="navbar">
+       <div class="container-fluid">
+         <ul class="nav navbar-nav">
+           <a class="navbar-brand brandname" href="{% url 'home' %}">TechBuzzy</a>
+         </ul>
+        <ul class="navbar-nav ml-auto">
+          {% if user.is_authenticated %}
+            <li><a class="nav-item nav-link" href="{% url 'posts:create' %}" class="btn btn-simple">Post</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'groups:create' %}" class="btn btn-simple">Create Group</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'account:logout' %}" class="btn btn-simple">Logout</a></li>
+          {% else %}
+            <li><a class="nav-item nav-link" href="{% url 'groups:all' %}" class="btn btn-simple">Groups</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'account:login' %}" class="btn btn-simple">Login</a></li>
+            <li><a class="nav-item nav-link" href="{% url 'account:signup' %}" class="btn btn-simple">SignUp</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mycontent ">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+</body>
+</html>
